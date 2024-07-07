@@ -44,7 +44,7 @@ public class ViewInicial : Form {
             BackColor = Color.Aqua,
             TextAlign = ContentAlignment.MiddleCenter,
         };
-        // BtnNovoPedido.Click += ClickNovoPedido;
+        BtnNovoPedido.Click += ClickNovoPedido;
 
         BtnCliente = new Button {
             Text = "Clientes",
@@ -172,6 +172,17 @@ public class ViewInicial : Form {
             this.Hide();
     }
     private void ViewPedido_FormClosed(object sender, EventArgs e)
+    {
+        this.Show();
+    }
+    private void ClickNovoPedido(object sender, EventArgs e)
+    {
+            ViewNovoPedido viewNovoPedido = new ViewNovoPedido(this);
+            viewNovoPedido.FormClosed += new  FormClosedEventHandler(ViewNovoPedido_FormClosed);
+            viewNovoPedido.Show();
+            this.Hide();
+    }
+    private void ViewNovoPedido_FormClosed(object sender, EventArgs e)
     {
         this.Show();
     }

@@ -72,3 +72,9 @@ INSERT INTO pedido_produto (idPedido, idProduto, quantidade, total) VALUES
 ('9', '8', '8', '60.80'),
 ('10', '10', '10', '60.00');
 
+
+
+
+//MELHORAS FUTURAS
+//1 - Enviar email dizendo as ventas detalahas do dia anterior (total faturado, produto mais e menos vendido)
+//2 - Filtro ao escrever o nome do produto para autocompletá-lo e assim fica mais fácil escolher o código
