@@ -64,39 +64,33 @@ namespace Repo {
                     command.Parameters.AddWithValue("@Total", pedido.Total);
 
                     int rowsAffected = command.ExecuteNonQuery();                    
-                    int ultimoId = Convert.ToInt32(command.LastInsertedId);
-                    // int LastIdPedidoInserido = Convert.ToInt32(command.LastInsertedId);
-                    string idPedidoAsString = Convert.ToString(ultimoId);
-                    MessageBox.Show("O id do pedido insertado é: " + idPedidoAsString + " Messagem desde o método Criar do repo ListPedido");
+                    int idUltimoPedidoInsertado = Convert.ToInt32(command.LastInsertedId);
+                    string idPedidoAsString = Convert.ToString(idUltimoPedidoInsertado);
 
                     if(rowsAffected > 0){
-                        // pedidos.Add(pedido);
-                        MessageBox.Show("Pedido salvo na tabela 'pedido'. Foi executado o 'INSERT INTO pedido' corretamente");
-
                         string insert2 = "INSERT INTO pedido_produto (idPedido, idProduto, quantidade, total) VALUES (@IdPedido2, @IdProduto, @Quantidade, @TotalDoProduto)";                        
                         MySqlCommand command2 = new MySqlCommand(insert2, conexao);
 
                         foreach (var item in produtosDoPedido)
                         {
-                            if(ultimoId < 0 || item.IdProduto < 0 || item.QuantidadePorProduto < 0 || item.TotalPorProduto < 0) {
+                            if(idUltimoPedidoInsertado < 0 || item.IdProduto < 0 || item.QuantidadePorProduto < 0 || item.TotalPorProduto < 0) {
                             MessageBox.Show("Não foi possível adicionar o pedidoproduto, favor preencher os campos corretamente e tentar outra vez");
                             } else {
                                 command2.Parameters.Clear();
-                                command2.Parameters.AddWithValue("@IdPedido2", ultimoId);
+                                command2.Parameters.AddWithValue("@IdPedido2", idUltimoPedidoInsertado);
                                 command2.Parameters.AddWithValue("@IdProduto", item.IdProduto);
                                 command2.Parameters.AddWithValue("@Quantidade", item.QuantidadePorProduto);
                                 command2.Parameters.AddWithValue("@TotalDoProduto", item.TotalPorProduto);
 
                                 int rowsAffected2 = command2.ExecuteNonQuery();
                                 if(rowsAffected2 > 0){
-                                    MessageBox.Show("Registro salvo na tabela 'pedidoproduto'. Foi executado o 'INSERT INTO pedidoproduto' corretamente");
+                                    // MessageBox.Show("Registro salvo na tabela 'pedidoproduto'. Foi executado o 'INSERT INTO pedidoproduto' corretamente");
                                     // pedidoprodutos.Add(pedidoproduto);
                                 } else {
                                     MessageBox.Show("Não foi possível executar o 'INSERT INTO pedidoproduto'");
                                 }
                             }
                         }
-
                     } else {
                         MessageBox.Show("Não foi possível adicionar o pedido na tabela pedido. Não foi executado o 'INSERT INTO pedido'");
                     }
@@ -107,7 +101,5 @@ namespace Repo {
             }
             CloseConexao();
         }
-
     }
-
 }

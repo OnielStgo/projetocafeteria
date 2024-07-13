@@ -4,7 +4,6 @@ using Controller;
 using Model;
 
 public class ViewFuncionario : Form {
-
     private readonly Form ParentForm;
     private readonly Label LblTitulo;
     private readonly Label LblTotalFuncionarios;
@@ -18,11 +17,9 @@ public class ViewFuncionario : Form {
     private readonly TextBox InpCpf;
     private readonly Label LblTelefone;    
     private readonly TextBox InpTelefone;
-
     private readonly Button BtnCadastrar;
     private readonly Button BtnAlterar;
     private readonly Button BtnDeletar;
-
     private readonly DataGridView DgvFuncionarios;
 
     public ViewFuncionario(Form parent) {
@@ -33,7 +30,6 @@ public class ViewFuncionario : Form {
         BackColor = Color.Blue;
 
         LblTitulo = new Label {
-
             Text = "FUNCIONÁRIOS",
             Size = new Size(500, 30),
             Font = new Font("Arial", 24, FontStyle.Bold),
@@ -49,11 +45,11 @@ public class ViewFuncionario : Form {
             Location = new Point(30, 100),
         };
         LblTotalFuncionariosNumber = new Label {
-            Text = "Número",
+            Text = "",
             AutoSize = true,
             Font = new Font("Arial", 16, FontStyle.Bold),
             BackColor = Color.Aqua,
-            Location = new Point(330, 100),
+            Location = new Point(360, 100),
         };
         LblSubTitulo = new Label {
             Text = "A seguir campos para cadastrar ou alterar um funcionário",
@@ -110,8 +106,6 @@ public class ViewFuncionario : Form {
             BackColor = Color.Aqua,
             Location = new Point(300, 350),
         };
-
-
         BtnCadastrar = new Button {
             Text = "Cadastrar",
             Location = new Point(50, 450),
@@ -196,20 +190,20 @@ public class ViewFuncionario : Form {
 
     private void Listar() {
         List<Funcionario> funcionarios = ControllerFuncionario.ListarFuncionario();
+        LblTotalFuncionariosNumber.Text = Convert.ToString(funcionarios.Count);
         DgvFuncionarios.Columns.Clear();
         DgvFuncionarios.AutoGenerateColumns = false;
         DgvFuncionarios.DataSource = funcionarios;
 
-        // DgvFuncionarios.Columns.Add(new DataGridViewTextBoxColumn {
-        //     DataPropertyName = "IdFuncionario",
-        //     HeaderText = "Id",
-        //     Width = 50
-        // });
-
+        DgvFuncionarios.Columns.Add(new DataGridViewTextBoxColumn {
+            DataPropertyName = "IdFuncionario",
+            HeaderText = "Id",
+            Width = 40
+        });
         DgvFuncionarios.Columns.Add(new DataGridViewTextBoxColumn {
             DataPropertyName = "nome",
             HeaderText = "Nome",
-            Width = 190
+            Width = 150
         });
         DgvFuncionarios.Columns.Add(new DataGridViewTextBoxColumn {
             DataPropertyName = "idade",

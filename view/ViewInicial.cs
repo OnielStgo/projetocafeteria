@@ -3,8 +3,7 @@ using System.Drawing;
 
 public class ViewInicial : Form {
     private readonly Label LblTitulo;
-    private readonly Label LblSubtitulo;
-   
+    private readonly Label LblSubtitulo;   
     private readonly Button BtnNovoPedido;
     private readonly Button BtnCliente;
     private readonly Button BtnProduto;
@@ -18,7 +17,6 @@ public class ViewInicial : Form {
         BackColor = Color.Brown;
 
         LblTitulo = new Label {
-
             Text = "Cafeteria NomeCafeteria",
             Size = new Size(500, 30),
             Font = new Font("Arial", 24, FontStyle.Bold),
@@ -34,8 +32,6 @@ public class ViewInicial : Form {
             TextAlign = ContentAlignment.MiddleCenter,
             Location = new Point(80, 100),
         };
-      
-
         BtnNovoPedido = new Button {
             Text = "Novo Pedido",
             Location = new Point(210, 200),
@@ -57,7 +53,7 @@ public class ViewInicial : Form {
         BtnCliente.Click += ClickTelaCliente;
 
         BtnProduto = new Button {
-            Text = "Produto",
+            Text = "Produtos",
             Location = new Point(220, 300),
             Font = new Font("Arial", 16, FontStyle.Bold),
             Size = new Size(150, 30),
@@ -67,10 +63,10 @@ public class ViewInicial : Form {
         BtnProduto.Click += ClickTelaProduto;
 
         BtnFuncionario = new Button {
-            Text = "Funcionário",
+            Text = "Funcionários",
             Location = new Point(390, 300),
             Font = new Font("Arial", 16, FontStyle.Bold),
-            Size = new Size(150, 30),
+            Size = new Size(160, 30),
             BackColor = Color.Aqua,
             TextAlign = ContentAlignment.MiddleCenter,
         };
@@ -94,14 +90,13 @@ public class ViewInicial : Form {
         Controls.Add(BtnFuncionario);
         Controls.Add(BtnHistPedido);
 
-        // Centralizando o Label inicialmente
-        CenterControls();
+        CentralizarElementos();
 
-        // Evento para manter o Label centralizado ao redimensionar o formulário
+        // Evento para manter os componentes centralizados ao redimensionar o formulário
         this.SizeChanged += new EventHandler(ViewInicial_SizeChanged);
     }
 
-     private void CenterControls()
+     private void CentralizarElementos()
     {
         LblTitulo.Left = (this.ClientSize.Width - LblTitulo.Width) / 2;
         LblTitulo.Top = this.ClientSize.Height / 8;
@@ -127,7 +122,7 @@ public class ViewInicial : Form {
 
     private void ViewInicial_SizeChanged(object sender, EventArgs e)
     {
-        CenterControls();
+        CentralizarElementos();
     }
 
     private void ClickTelaProduto(object sender, EventArgs e)
@@ -187,164 +182,3 @@ public class ViewInicial : Form {
         this.Show();
     }
 }
-
-
-
-/*
-
-
-using Controller;
-using Model;
-
-namespace View;
-
-public class ViewPessoa : Form {
-
-    private readonly Label LblTitulo;
-    private readonly Label LblData;
-    private readonly Label LblHora;
-    private readonly Label LblConcluida;
-    private readonly TextBox InpTitulo;
-    private readonly TextBox InpData;
-    private readonly TextBox InpHora;
-    private readonly TextBox InpConcluida;
-    private readonly Button BtnCadastrar;
-    private readonly Button BtnAlterar;
-    private readonly Button BtnDeletar;
-    private readonly DataGridView DgvPessoas;
-
-    public ViewPessoa() {
-        ControllerPessoa.Sincronizar();
-        Size = new Size(600, 600);
-        StartPosition = FormStartPosition.CenterScreen;
-
-        LblTitulo = new Label {
-            Text = "Titulo: ",
-            Location = new Point(50, 50),
-        };
-        LblData = new Label {
-            Text = "Data: ",
-            Location = new Point(50, 100),
-        };
-        LblHora = new Label {
-            Text = "Hora: ",
-            Location = new Point(50, 150),
-        };
-
-        LblConcluida = new Label {
-            Text = "Concluida: ",
-            Location = new Point(50, 200),
-        };
-
-        InpTitulo = new TextBox {
-            Name = "Titulo",
-            Location = new Point(150, 50),
-            Size = new Size(200, 20)
-        };
-        InpData = new TextBox {
-            Name = "Data",
-            Location = new Point(150, 100),
-            Size = new Size(200, 20)
-        };
-        InpHora = new TextBox {
-            Name = "Hora",
-            Location = new Point(150, 150),
-            Size = new Size(200, 20)
-        };
-        InpConcluida = new TextBox {
-            Name = "Concluida",
-            Location = new Point(150, 200),
-            Size = new Size(200, 20)
-        };
-
-        BtnCadastrar = new Button {
-            Text = "Cadastrar",
-            Location = new Point(50, 250),
-        };
-        BtnCadastrar.Click += ClickCadastrar;
-        BtnAlterar = new Button {
-            Text = "Alterar",
-            Location = new Point(150, 250),
-        };
-        BtnAlterar.Click += ClickAlterar;
-        BtnDeletar = new Button {
-            Text = "Deletar",
-            Location = new Point(250, 250),
-        };
-        BtnDeletar.Click += ClickDeletar;
-
-        DgvPessoas = new DataGridView {
-            Location = new Point(0, 300),
-            Size = new Size(550, 150)
-        };
-
-        Controls.Add(LblTitulo);
-        Controls.Add(LblData);
-        Controls.Add(LblHora);
-        Controls.Add(LblConcluida);
-        Controls.Add(InpTitulo);
-        Controls.Add(InpData);
-        Controls.Add(InpHora);
-        Controls.Add(InpConcluida);
-        Controls.Add(BtnCadastrar);
-        Controls.Add(BtnAlterar);
-        Controls.Add(BtnDeletar);
-        Controls.Add(DgvPessoas);
-        Listar();
-    }
-
-    private void ClickCadastrar(object? sender, EventArgs e) {
-        if(InpTitulo.Text == "") {
-            return;
-        }
-        ControllerPessoa.CriarPessoa(InpTitulo.Text, InpData.Text, InpHora.Text, InpConcluida.Text);
-        Listar();
-    }
-    
-    private void ClickAlterar(object? sender, EventArgs e) {
-        int index = DgvPessoas.SelectedRows[0].Index;
-        if(InpTitulo.Text == "") {
-            return;
-        }
-        ControllerPessoa.AlterarPessoa(index, InpTitulo.Text, InpData.Text, InpHora.Text, InpConcluida.Text);
-        Listar();
-    }
-
-    private void Listar() {
-        List<Pessoa> pessoas = ControllerPessoa.ListarPessoa();
-        DgvPessoas.Columns.Clear();
-        DgvPessoas.AutoGenerateColumns = false;
-        DgvPessoas.DataSource = pessoas;
-        DgvPessoas.Columns.Add(new DataGridViewTextBoxColumn {
-            DataPropertyName = "Id",
-            HeaderText = "Id"
-        });
-        DgvPessoas.Columns.Add(new DataGridViewTextBoxColumn {
-            DataPropertyName = "Titulo",
-            HeaderText = "Titulo"
-        });
-        DgvPessoas.Columns.Add(new DataGridViewTextBoxColumn {
-            DataPropertyName = "Data",
-            HeaderText = "Data"
-        });
-        DgvPessoas.Columns.Add(new DataGridViewTextBoxColumn {
-            DataPropertyName = "Hora",
-            HeaderText = "Hora"
-        });
-        DgvPessoas.Columns.Add(new DataGridViewTextBoxColumn {
-            DataPropertyName = "Concluida",
-            HeaderText = "Concluida"
-        });
-    }
-    private void ClickDeletar(object? sender, EventArgs e) {
-        int index = DgvPessoas.SelectedRows[0].Index;
-        ControllerPessoa.DeletarPessoa(index);
-        Listar();
-    }
-
-
-}
-
-
-
-*/

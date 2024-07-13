@@ -16,7 +16,6 @@ public class ViewProduto : Form {
     private readonly TextBox InpDescricao;
     private readonly Label LblPreco;    
     private readonly TextBox InpPreco;
-
     private readonly Button BtnCadastrar;
     private readonly Button BtnAlterar;
     private readonly Button BtnDeletar;
@@ -31,7 +30,6 @@ public class ViewProduto : Form {
         BackColor = Color.Blue;
 
         LblTitulo = new Label {
-
             Text = "PRODUTOS",
             Size = new Size(500, 30),
             Font = new Font("Arial", 24, FontStyle.Bold),
@@ -47,11 +45,11 @@ public class ViewProduto : Form {
             Location = new Point(30, 100),
         };
         LblTotalProdutosNumber = new Label {
-            Text = "Número",
+            Text = "",
             AutoSize = true,
             Font = new Font("Arial", 16, FontStyle.Bold),
             BackColor = Color.Aqua,
-            Location = new Point(330, 100),
+            Location = new Point(320, 100),
         };
         LblSubTitulo = new Label {
             Text = "A seguir campos para cadastrar ou alterar um produto",
@@ -96,7 +94,6 @@ public class ViewProduto : Form {
             BackColor = Color.Aqua,
             Location = new Point(300, 300),
         };
-
 
         BtnCadastrar = new Button {
             Text = "Cadastrar",
@@ -179,6 +176,7 @@ public class ViewProduto : Form {
 
     private void Listar() {
         List<Produto> produtos = ControllerProduto.ListarProduto();
+        LblTotalProdutosNumber.Text = Convert.ToString(produtos.Count);
         DgvProdutos.Columns.Clear();
         DgvProdutos.AutoGenerateColumns = false;
         DgvProdutos.DataSource = produtos;
