@@ -26,6 +26,7 @@ namespace Repo {
         }
 
         public static List<Produto> Sincronizar() {
+            produtos.Clear();
             // inicializa a conexão com o banco
             InitConexao();
             string query = "SELECT * FROM produto";

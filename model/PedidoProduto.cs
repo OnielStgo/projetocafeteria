@@ -2,50 +2,36 @@ using Repo;
 
 
 namespace Model {
-    public class Pedido {
+    public class PedidoProduto {
+        public int IdPed_Prod { set; get; }
         public int IdPedido { set; get; }
-        public int IdCliente { set; get; }
-        public int IdFuncionario { set; get; }
-        public DateTime Data { set; get; }
-        public decimal Total { set; get; }
-        // public int IndiceProduto { set; get; }
+        public int IdProduto { set; get; }
         public int Quantidade { set; get; }
-        public decimal TotalDoProduto { set; get; }
-        // IndiceProduto, quantidade, TotalDoProdu
-        ProdutosDoPedido produtosDoPedido;
-        
+        public decimal Total { set; get; }
 
-        public Pedido() {}
+        public PedidoProduto() {}
 
-        // public Pedido(int idCliente, int idFuncionario, decimal total, int IndiceProduto, int Quantidade, decimal TotalDoProduto) {
-        //     IdCliente = idCliente;
-        //     IdFuncionario = idFuncionario;
-        //     Data = DateTime.Now;
-        //     Total = total;
-
-        //     // MessageBox.Show(typeof(idCliente) );
-            
-        //     ListPedido.Criar(this, IndiceProduto, Quantidade, TotalDoProduto);
-        // }
-        public Pedido(int idCliente, int idFuncionario, decimal total, List<ProdutosDoPedido> produtosDoPedido) {
-            IdCliente = idCliente;
-            IdFuncionario = idFuncionario;
-            Data = DateTime.Now;
+        public PedidoProduto(int idPedido, int idproduto, int quantidade, decimal total) {
+            IdPedido = idPedido;
+            IdProduto = idproduto;
+            Quantidade = quantidade;
             Total = total;
-
-            // MessageBox.Show(typeof(idCliente) );
             
-            // ListPedido.Criar(this, IndiceProduto, Quantidade, TotalDoProduto);
-            ListPedido.Criar(this, produtosDoPedido);
+            // ListPedidoProduto.Criar(this);
         }
 
-        public static List<Pedido> Sincronizar() {
-            return ListPedido.Sincronizar();
+        public static List<PedidoProduto>  ObterDetalhesDeUmPedido(int idPedido){
+            return ListPedidoProduto.ObterDetalhesDeUmPedido(idPedido);
         }
 
-        public static List<Pedido> ListarPedido() {
-            return ListPedido.pedidos;
-        }
+
+        // public static List<PedidoProduto> Sincronizar() {
+        //     return ListPedidoProduto.Sincronizar();
+        // }
+
+        // public static List<PedidoProduto> ListarPedidoProduto() {
+        //     return ListPedidoProduto.pedidoprodutos;
+        // }
 
         // public static void AlterarPedido(
         //     int indice,

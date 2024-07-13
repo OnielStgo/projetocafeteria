@@ -9,6 +9,8 @@ public class ViewPedido : Form {
     private readonly Label LblTotalPedidoNumber;
     private readonly DataGridView DgvPedido;
 
+    private int idPed_Prod { set; get; }
+
     public ViewPedido(Form parent) {
         ControllerPedido.Sincronizar();
         ParentForm = parent;
@@ -44,6 +46,8 @@ public class ViewPedido : Form {
             Location = new Point(110, 200),
             Size = new Size(400, 500),
         };
+        // DgvPedido.CellClick += MostrarDetalheDoPedido;
+        DgvPedido.CellClick += ClickDetalhesDePedido;
 
         Controls.Add(LblTitulo);
         Controls.Add(LblTotalPedido);
@@ -58,25 +62,132 @@ public class ViewPedido : Form {
         DgvPedido.DataSource = pedidos;
 
         DgvPedido.Columns.Add(new DataGridViewTextBoxColumn {
+            DataPropertyName = "IdPedido",
+            HeaderText = "Id_Pedido",
+            Width = 70
+        });
+        DgvPedido.Columns.Add(new DataGridViewTextBoxColumn {
             DataPropertyName = "IdCliente",
-            HeaderText = "Cliente",
-            Width = 80
+            HeaderText = "Id_Cliente",
+            Width = 70
         });
 
         DgvPedido.Columns.Add(new DataGridViewTextBoxColumn {
             DataPropertyName = "IdFuncionario",
-            HeaderText = "Funcionario",
-            Width = 80
+            HeaderText = "Id_Funcionario",
+            Width = 100
         });
         DgvPedido.Columns.Add(new DataGridViewTextBoxColumn {
             DataPropertyName = "data",
             HeaderText = "Data",
-            Width = 100,
+            Width = 110,
         });
         DgvPedido.Columns.Add(new DataGridViewTextBoxColumn {
             DataPropertyName = "total",
             HeaderText = "Total",
-            Width = 80,
+            Width = 60,
         });
     }
+
+    // private void MostrarDetalheDoPedido(object sender, DataGridViewCellEventArgs e) {
+    //     // Verifica se o índice da linha é válido
+    //     if (e.RowIndex >= 0)
+    //     {
+    //         // Acessa a linha clicada
+    //         DataGridViewRow row = DgvPedido.Rows[e.RowIndex];
+
+    //         // Chama a função e passa a linha clicada
+    //         ExecuteFunction(row);
+    //     }        
+    // }
+
+    // private void ExecuteFunction(DataGridViewRow row)
+    // {
+    //     // Exemplo: Acessa o valor da primeira célula da linha
+    //     var cellValue = row.Cells[0].Value;
+    //     idPed_Prod = Convert.ToInt32(cellValue);
+
+    //     MessageBox.Show($"Valor da célula: {cellValue}");
+                
+    // }
+
+
+    private void ClickDetalhesDePedido(object sender, DataGridViewCellEventArgs e)
+    {
+
+        int numero = 0;
+
+        if (e.RowIndex >= 0)
+        {
+            // Acessa a linha clicada
+            DataGridViewRow row = DgvPedido.Rows[e.RowIndex];
+
+            var cellValue = row.Cells[0].Value;
+            numero = Convert.ToInt32(cellValue);
+
+            // MessageBox.Show($"Valor da célula: {cellValue}");   
+        }  
+            
+
+
+
+            // ViewProdutosDoPedido viewProdutosDoPedido = new ViewProdutosDoPedido(this);
+            ViewProdutosDoPedido viewProdutosDoPedido = new ViewProdutosDoPedido(this, numero);
+            viewProdutosDoPedido.FormClosed += new FormClosedEventHandler(ViewProdutosDoPedido_FormClosed);
+            viewProdutosDoPedido.Show();
+            this.Hide();
+    }
+    private void ViewProdutosDoPedido_FormClosed(object sender, EventArgs e)
+    {
+        this.Show();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // private void MostrarDetalheDoPedido(object sender, DataGridViewCellEventArgs e) {
+    //     // Verifica se o índice da linha é válido
+    //     if (e.RowIndex >= 0)
+    //     {
+    //         // Acessa a linha clicada
+    //         DataGridViewRow row = DgvPedido.Rows[e.RowIndex];
+
+    //         // Chama a função e passa a linha clicada
+    //         ExecuteFunction(row);
+    //     }        
+    // }
+
+    // private void ExecuteFunction(DataGridViewRow row)
+    // {
+    //     // Exemplo: Acessa o valor da primeira célula da linha
+    //     var cellValue = row.Cells[0].Value;
+    //     idPed_Prod = Convert.ToInt32(cellValue);
+
+    //     MessageBox.Show($"Valor da célula: {cellValue}");
+                
+    // }
+    
+    // private void ClickDetalhesDePedido(object sender, EventArgs e)
+    // {
+    //         ViewNovoPedido viewNovoPedido = new ViewNovoPedido(this);
+    //         viewNovoPedido.FormClosed += new  FormClosedEventHandler(ViewNovoPedido_copy);
+    //         viewNovoPedido.Show();
+    //         this.Hide();
+    // }
+    // private void ViewNovoPedido_copy(object sender, EventArgs e)
+    // {
+    //     this.Show();
+    // }
 }

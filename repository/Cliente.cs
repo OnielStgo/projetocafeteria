@@ -25,6 +25,7 @@ namespace Repo {
             }
         }
         public static List<Cliente> Sincronizar() {
+            clientes.Clear();
 
             InitConexao();
             string query = "SELECT * FROM cliente";

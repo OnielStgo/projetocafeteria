@@ -1,42 +1,40 @@
 using Model;
 
 namespace Controller {
-    public class ControllerPedido {
+    public class ControllerPedidoProduto {
 
-        public static List<Pedido> Sincronizar() {
-            return Pedido.Sincronizar();
-        }
-        public static void CriarPedido(
-            int idCliente,
-            int idFuncionario,
-            decimal total,
-            // int IndiceProduto, 
-            // int quantidade, 
-            // decimal TotalDoProduto
-            List<ProdutosDoPedido> produtosDoPedido
-
+        // public static List<Pedido> Sincronizar() {
+        //     return Pedido.Sincronizar();
+        // }
+        public static void CriarPedidoProduto(
+            int idPedido,
+            int idProduto,
+            int quantidade,
+            decimal total
         ) {
-            // MessageBox.Show("Oi desde o controller Pedido");
-
-            new Pedido(
-                idCliente,
-                idFuncionario,
-                total,
-                // IndiceProduto, 
-                // quantidade,
-                // TotalDoProduto
-                produtosDoPedido
+            new PedidoProduto(
+                idPedido,
+                idProduto,
+                quantidade,
+                total
             );
         }
 
-        public static List<Pedido> ListarPedido() {
-            return Pedido.ListarPedido();
+         public static List<PedidoProduto>  ObterDetalhesDeUmPedido(int idPedido){
+            return PedidoProduto.ObterDetalhesDeUmPedido(idPedido);
         }
+
+
+        // public static List<Pedido> ListarPedido() {
+        //     return Pedido.ListarPedido();
+        // }
+
+        
 
         // public static void AlterarPedido(
         //     int indice,
-        //     string idCliente,
-        //     string idFuncionario,
+        //     string idPedido,
+        //     string idProduto,
         //     string cpf,
         //     string telefone
         // ) {
@@ -44,8 +42,8 @@ namespace Controller {
         //     if(indice >= 0 && indice < funcionarios.Count){
         //         Pedido.AlterarPedido(
         //             indice,
-        //             idCliente,
-        //             idFuncionario,
+        //             idPedido,
+        //             idProduto,
         //             cpf,
         //             telefone
         //         );
