@@ -9,26 +9,29 @@ public class ViewInicial : Form {
     private readonly Button BtnProduto;
     private readonly Button BtnFuncionario;
     private readonly Button BtnHistPedido;
+    private readonly string CorFundo = "#DEB887";
+    private readonly string CorTitulos = "#8B4513";
+    private readonly string CorBotao = "#D2691E";
 
 
     public ViewInicial() {
         Size = new Size(600, 600);
         StartPosition = FormStartPosition.CenterScreen;
-        BackColor = Color.Brown;
+        BackColor = ColorTranslator.FromHtml(CorFundo);
 
         LblTitulo = new Label {
-            Text = "Cafeteria NomeCafeteria",
-            Size = new Size(500, 30),
-            Font = new Font("Arial", 24, FontStyle.Bold),
-            BackColor = Color.Aqua,
+            Text = "Cafeteria <Café-Dev />",
+            Size = new Size(550, 50),
+            Font = new Font("Arial", 36, FontStyle.Bold),
+            ForeColor = ColorTranslator.FromHtml(CorTitulos),
             TextAlign = ContentAlignment.MiddleCenter,
             Location = new Point(50, 10),
         };
         LblSubtitulo = new Label {
             Text = "Sistema de controle de pedidos",
-            Size = new Size(450, 24),
-            Font = new Font("Arial", 16, FontStyle.Bold),
-            BackColor = Color.Aqua,
+            Size = new Size(450, 36),
+            Font = new Font("Arial", 20, FontStyle.Bold),
+            ForeColor = ColorTranslator.FromHtml(CorTitulos),
             TextAlign = ContentAlignment.MiddleCenter,
             Location = new Point(80, 100),
         };
@@ -37,7 +40,7 @@ public class ViewInicial : Form {
             Location = new Point(210, 200),
             Font = new Font("Arial", 16, FontStyle.Bold),
             Size = new Size(180, 30),
-            BackColor = Color.Aqua,
+            BackColor = ColorTranslator.FromHtml(CorBotao),
             TextAlign = ContentAlignment.MiddleCenter,
         };
         BtnNovoPedido.Click += ClickNovoPedido;
@@ -47,7 +50,7 @@ public class ViewInicial : Form {
             Location = new Point(50, 300),
             Font = new Font("Arial", 16, FontStyle.Bold),
             Size = new Size(150, 30),
-            BackColor = Color.Aqua,
+            BackColor = ColorTranslator.FromHtml(CorBotao),
             TextAlign = ContentAlignment.MiddleCenter,
         };
         BtnCliente.Click += ClickTelaCliente;
@@ -57,7 +60,7 @@ public class ViewInicial : Form {
             Location = new Point(220, 300),
             Font = new Font("Arial", 16, FontStyle.Bold),
             Size = new Size(150, 30),
-            BackColor = Color.Aqua,
+            BackColor = ColorTranslator.FromHtml(CorBotao),
             TextAlign = ContentAlignment.MiddleCenter,
         };
         BtnProduto.Click += ClickTelaProduto;
@@ -67,7 +70,7 @@ public class ViewInicial : Form {
             Location = new Point(390, 300),
             Font = new Font("Arial", 16, FontStyle.Bold),
             Size = new Size(160, 30),
-            BackColor = Color.Aqua,
+            BackColor = ColorTranslator.FromHtml(CorBotao),
             TextAlign = ContentAlignment.MiddleCenter,
         };
         BtnFuncionario.Click += ClickTelaFuncionario;
@@ -77,7 +80,7 @@ public class ViewInicial : Form {
             Location = new Point(210, 380),
             Font = new Font("Arial", 16, FontStyle.Bold),
             Size = new Size(250, 30),
-            BackColor = Color.Aqua,
+            BackColor = ColorTranslator.FromHtml(CorBotao),
             TextAlign = ContentAlignment.MiddleCenter,
         };
         BtnHistPedido.Click += ClickHistPedido;

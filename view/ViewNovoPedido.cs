@@ -7,8 +7,6 @@ public class ViewNovoPedido : Form {
 
     private readonly Form ParentForm;
     private readonly Label LblTitulo;
-    // private readonly Label LblSubTituloTotalProdutos;
-    // private readonly Label LblSubTituloTotalProdutosNumber;
     private readonly Label LblSubTitulo;
     private readonly Label LblIdCliente;    
     private readonly TextBox InpIdCliente;
@@ -28,40 +26,43 @@ public class ViewNovoPedido : Form {
     public decimal ValorTotal { set; get; }
     public int IndiceProduto { set; get; }
     private readonly DataGridView DgvProdutos;
+    private readonly string CorFundo = "#CD853F";
+    private readonly string CorTitulos = "#8B4513";
+    private readonly string CorCamposParaPrencher = "#F4A460";
+    private readonly string CorBotao = "#A0522D";
 
     public ViewNovoPedido(Form parent) {
         ControllerProduto.Sincronizar();
         ParentForm = parent;
         Size = new Size(650, 800);
         StartPosition = FormStartPosition.CenterScreen;
-        BackColor = Color.Blue;
+        BackColor = ColorTranslator.FromHtml(CorFundo);
 
         LblTitulo = new Label {
             Text = "NOVO PEDIDO",
-            Size = new Size(500, 30),
-            Font = new Font("Arial", 24, FontStyle.Bold),
-            BackColor = Color.Aqua,
+            Size = new Size(420, 35),
+            Font = new Font("Arial", 32, FontStyle.Bold),
+            ForeColor = ColorTranslator.FromHtml(CorTitulos),
             TextAlign = ContentAlignment.MiddleCenter,
-            Location = new Point(50, 20),
+            Location = new Point(120, 30),
         };
         LblSubTitulo = new Label {
             Text = "A seguir campos para adicionar um novo pedido",
             AutoSize = true,
             Font = new Font("Arial", 16, FontStyle.Bold),
-            BackColor = Color.Aqua,
-            Location = new Point(30, 100),
+            ForeColor = ColorTranslator.FromHtml(CorTitulos),
+            Location = new Point(60, 100),
         };
         LblIdCliente = new Label {
             Text = "IdCliente",
             TextAlign = ContentAlignment.MiddleCenter,
             Size = new Size(130, 24),
             Font = new Font("Arial", 13, FontStyle.Bold),
-            BackColor = Color.Aqua,
             Location = new Point(160, 170),
         };
         InpIdCliente = new TextBox {
             Size = new Size(100, 80),
-            BackColor = Color.Aqua,
+            BackColor = ColorTranslator.FromHtml(CorCamposParaPrencher),
             Location = new Point(300, 170),
         };
         LblIdFuncionario = new Label {
@@ -69,54 +70,50 @@ public class ViewNovoPedido : Form {
             TextAlign = ContentAlignment.MiddleCenter,
             Size = new Size(130, 24),
             Font = new Font("Arial", 13, FontStyle.Bold),
-            BackColor = Color.Aqua,
             Location = new Point(160, 220),
         };
         InpIdFuncionario = new TextBox {
             Size = new Size(100, 80),
-            BackColor = Color.Aqua,
+            BackColor = ColorTranslator.FromHtml(CorCamposParaPrencher),
             Location = new Point(300, 220),
         };
         LblCodProduto = new Label {
             Text = "Produto",
             TextAlign = ContentAlignment.MiddleCenter,
-            Size = new Size(90, 24),
+            Size = new Size(100, 24),
             Font = new Font("Arial", 13, FontStyle.Bold),
-            BackColor = Color.Aqua,
-            Location = new Point(200, 270),
+            Location = new Point(180, 270),
         };
         CbbCodProduto = new ComboBox
         {
             Location = new Point(300, 270),
             Width = 250,
             AutoCompleteMode = AutoCompleteMode.SuggestAppend,
-            AutoCompleteSource = AutoCompleteSource.CustomSource,   
+            AutoCompleteSource = AutoCompleteSource.CustomSource,
+            BackColor = ColorTranslator.FromHtml(CorCamposParaPrencher),
         };
         LblQuantidade = new Label {
             Text = "Quantidade",
             TextAlign = ContentAlignment.MiddleCenter,
             Size = new Size(130, 24),
             Font = new Font("Arial", 13, FontStyle.Bold),
-            BackColor = Color.Aqua,
             Location = new Point(160, 320),
         };
         InpQuantidade = new TextBox {
             Size = new Size(100, 80),
-            BackColor = Color.Aqua,
+            BackColor = ColorTranslator.FromHtml(CorCamposParaPrencher),
             Location = new Point(300, 320),
         };
         LblSubTituloTotal = new Label {
             Text = "Valor total do pedido:  R$",
             Size = new Size(225, 24),
             Font = new Font("Arial", 13, FontStyle.Bold),
-            BackColor = Color.Aqua,
             Location = new Point(250, 680),
         };
         LblTotalValor = new Label {
             Text = "",
             Font = new Font("Arial", 14, FontStyle.Bold),
             Size = new Size(100, 24),
-            BackColor = Color.Aqua,
             Location = new Point(480, 680),
         };
         BtnAddProduto = new Button {
@@ -124,7 +121,7 @@ public class ViewNovoPedido : Form {
             Location = new Point(420, 360),
             Font = new Font("Arial", 14, FontStyle.Bold),
             Size = new Size(160, 25),
-            BackColor = Color.Aqua,
+            BackColor = ColorTranslator.FromHtml(CorBotao),
             TextAlign = ContentAlignment.MiddleCenter,
         };
         BtnAddProduto.Click += ClickAddProduto;
@@ -134,7 +131,7 @@ public class ViewNovoPedido : Form {
             Location = new Point(430, 720),
             Font = new Font("Arial", 16, FontStyle.Bold),
             Size = new Size(150, 30),
-            BackColor = Color.Aqua,
+            BackColor = ColorTranslator.FromHtml(CorBotao),
             TextAlign = ContentAlignment.MiddleCenter,
         };
         BtnFinalizar.Click += ClickFinalizar;

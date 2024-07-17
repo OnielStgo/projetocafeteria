@@ -85,12 +85,12 @@ namespace Repo {
                                 int rowsAffected2 = command2.ExecuteNonQuery();
                                 if(rowsAffected2 > 0){
                                     // MessageBox.Show("Registro salvo na tabela 'pedidoproduto'. Foi executado o 'INSERT INTO pedidoproduto' corretamente");
-                                    // pedidoprodutos.Add(pedidoproduto);
                                 } else {
                                     MessageBox.Show("Não foi possível executar o 'INSERT INTO pedidoproduto'");
                                 }
-                            }
+                            }                            
                         }
+                        MessageBox.Show("Pedido adicionado corretamente!");
                     } else {
                         MessageBox.Show("Não foi possível adicionar o pedido na tabela pedido. Não foi executado o 'INSERT INTO pedido'");
                     }

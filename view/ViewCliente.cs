@@ -7,6 +7,7 @@ public class ViewCliente : Form {
 
     private readonly Form ParentForm;
     private readonly Label LblTitulo;
+    private readonly Button BtnAjuda;
     private readonly Label LblTotalClientes;
     private readonly Label LblTotalClientesNumber;
     private readonly Label LblSubTitulo;
@@ -22,89 +23,103 @@ public class ViewCliente : Form {
     private readonly Button BtnAlterar;
     private readonly Button BtnDeletar;
     private readonly DataGridView DgvClientes;
+    private readonly string CorFundo = "#CD853F";
+    private readonly string CorTitulos = "#8B4513";
+    private readonly string CorCamposParaPrencher = "#F4A460";
+    private readonly string CorBotao = "#A0522D";
 
     public ViewCliente(Form parent) {
         ControllerCliente.Sincronizar();
         ParentForm = parent;
         Size = new Size(650, 800);
         StartPosition = FormStartPosition.CenterScreen;
-        BackColor = Color.Blue;
+        BackColor = ColorTranslator.FromHtml(CorFundo);
 
         LblTitulo = new Label {
             Text = "CLIENTES",
-            Size = new Size(500, 30),
-            Font = new Font("Arial", 24, FontStyle.Bold),
-            BackColor = Color.Aqua,
+            Size = new Size(400, 40),
+            Font = new Font("Arial", 32, FontStyle.Bold),
+            ForeColor = ColorTranslator.FromHtml(CorTitulos),
             TextAlign = ContentAlignment.MiddleCenter,
-            Location = new Point(50, 10),
+            Location = new Point(130, 30),
         };
+        BtnAjuda = new Button {
+            Text = "Ajuda",
+            Size = new Size(60, 30),
+            Font = new Font("Arial", 12, FontStyle.Bold),
+            ForeColor = ColorTranslator.FromHtml(CorTitulos),
+            TextAlign = ContentAlignment.MiddleCenter,
+            Location = new Point(540, 20),
+        };
+        BtnAjuda.Click += ClickAjuda;
+
         LblTotalClientes = new Label {
-            Text = "Número total de clientes:",
+            Text = "Número total de clientes cadastrados:",
             AutoSize = true,
             Font = new Font("Arial", 16, FontStyle.Bold),
-            BackColor = Color.Aqua,
-            Location = new Point(30, 100),
+            ForeColor = ColorTranslator.FromHtml(CorTitulos),
+            Location = new Point(80, 100),
         };
         LblTotalClientesNumber = new Label {
             Text = "",
             AutoSize = true,
             Font = new Font("Arial", 16, FontStyle.Bold),
-            BackColor = Color.Aqua,
-            Location = new Point(310, 100),
+            ForeColor = ColorTranslator.FromHtml(CorTitulos),
+            Location = new Point(480, 100),
         };
         LblSubTitulo = new Label {
             Text = "A seguir campos para cadastrar ou alterar um cliente",
             AutoSize = true,
             Font = new Font("Arial", 16, FontStyle.Bold),
-            BackColor = Color.Aqua,
+            ForeColor = ColorTranslator.FromHtml(CorTitulos),
             Location = new Point(30, 150),
         };
         LblNome = new Label {
             Text = "Nome",
             Size = new Size(95, 24),
             Font = new Font("Arial", 13, FontStyle.Bold),
-            BackColor = Color.Aqua,
             Location = new Point(195, 200),
+            TextAlign = ContentAlignment.MiddleCenter,
         };
         InpNome = new TextBox {
             Size = new Size(100, 80),
-            BackColor = Color.Aqua,
+            BackColor = ColorTranslator.FromHtml(CorCamposParaPrencher),
             Location = new Point(300, 200),
         };
         LblIdade = new Label {
             Text = "Idade",
             Size = new Size(95, 24),
             Font = new Font("Arial", 13, FontStyle.Bold),
-            BackColor = Color.Aqua,
             Location = new Point(195, 250),
+            TextAlign = ContentAlignment.MiddleCenter,
         };
         InpIdade = new TextBox {
             Size = new Size(100, 80),
-            BackColor = Color.Aqua,
+            BackColor = ColorTranslator.FromHtml(CorCamposParaPrencher),
             Location = new Point(300, 250),
         };
         LblCpf = new Label {
             Text = "CPF",
             Size = new Size(95, 24),
             Font = new Font("Arial", 13, FontStyle.Bold),
-            BackColor = Color.Aqua,
             Location = new Point(195, 300),
+            TextAlign = ContentAlignment.MiddleCenter,
         };
         InpCpf = new TextBox {
             Size = new Size(100, 80),
-            BackColor = Color.Aqua,
+            BackColor = ColorTranslator.FromHtml(CorCamposParaPrencher),
             Location = new Point(300, 300),
         };
         LblTelefone = new Label {
             Text = "Telefone",
             Size = new Size(95, 24),
             Font = new Font("Arial", 13, FontStyle.Bold),
-            BackColor = Color.Aqua,
             Location = new Point(195, 350),
+            TextAlign = ContentAlignment.MiddleCenter,
         };
         InpTelefone = new TextBox {
             Size = new Size(100, 80),
-            BackColor = Color.Aqua,
+            BackColor = ColorTranslator.FromHtml(CorCamposParaPrencher),
             Location = new Point(300, 350),
         };
         BtnCadastrar = new Button {
@@ -112,7 +127,7 @@ public class ViewCliente : Form {
             Location = new Point(50, 450),
             Font = new Font("Arial", 16, FontStyle.Bold),
             Size = new Size(150, 30),
-            BackColor = Color.Aqua,
+            BackColor = ColorTranslator.FromHtml(CorBotao),
             TextAlign = ContentAlignment.MiddleCenter,
         };
         BtnCadastrar.Click += ClickCadastrar;
@@ -122,7 +137,7 @@ public class ViewCliente : Form {
             Location = new Point(220, 450),
             Font = new Font("Arial", 16, FontStyle.Bold),
             Size = new Size(150, 30),
-            BackColor = Color.Aqua,
+            BackColor = ColorTranslator.FromHtml(CorBotao),
             TextAlign = ContentAlignment.MiddleCenter,
         };
         BtnAlterar.Click += ClickAlterar;
@@ -132,7 +147,7 @@ public class ViewCliente : Form {
             Location = new Point(390, 450),
             Font = new Font("Arial", 16, FontStyle.Bold),
             Size = new Size(150, 30),
-            BackColor = Color.Aqua,
+            BackColor = ColorTranslator.FromHtml(CorBotao),
             TextAlign = ContentAlignment.MiddleCenter,
         };
         BtnDeletar.Click += ClickDeletar;
@@ -143,6 +158,7 @@ public class ViewCliente : Form {
         };
 
         Controls.Add(LblTitulo);
+        Controls.Add(BtnAjuda);
         Controls.Add(LblTotalClientes);
         Controls.Add(LblTotalClientesNumber);
         Controls.Add(LblSubTitulo);
@@ -159,6 +175,10 @@ public class ViewCliente : Form {
         Controls.Add(BtnDeletar);
         Controls.Add(DgvClientes);
         Listar();
+    }
+
+    private void ClickAjuda(object? sender, EventArgs e) {
+        MessageBox.Show("AJUDA:\n\n- Para cadastrar um novo cliente primerio peencha todos os campos e depois clique no botão 'Cadastrar'.\n\n- Para alterar os dados de um cliente cadastrado, primerio selecione o cliente clicando na coluna vazia da extrema esquerda para selecionar a fila enteira, depois preencha os campos e por útlimo clique no botão 'Alterar'.\n\n- Para deletar um cliente cadastrado, primerio selecione o cliente clicando na coluna vazia da extrema esquerda para selecionar a fila enteira, e depois clique no botão 'Deletar'. ");
     }
 
     private void ClickCadastrar(object? sender, EventArgs e) {
