@@ -195,7 +195,13 @@ public class ViewNovoPedido : Form {
                 MessageBox.Show("Favor verificar os campos e tentar outra vez");
                 return;
             }
-
+     
+            if (!(int.TryParse(InpIdCliente.Text, out int result) && int.TryParse(InpIdFuncionario.Text, out int result2) && int.TryParse(InpQuantidade.Text, out int result3)))
+            {
+                MessageBox.Show("Não foi possível adicionar o produto, favor revisar os campos e tentar outra vez.");
+                return;
+            }
+    
             string idcliente = InpIdCliente.Text;
             string idfuncionario = InpIdFuncionario.Text;
             string descricao = CbbCodProduto.Text;
@@ -211,6 +217,12 @@ public class ViewNovoPedido : Form {
                     indiceDoProduto = listaDescricaoProdutos.IndexOf(descricaoProduto);
                     idDoProduto = produtos[indiceDoProduto].IdProduto;
                 }
+            }
+
+            if (idDoProduto == 0)
+            {
+                MessageBox.Show("O nome do produto está incorrreto, favor selecione o produto correto e tente outra vez");
+                return;
             }
 
             int IndiceProdutoSelecionado = CbbCodProduto.SelectedIndex + 1;

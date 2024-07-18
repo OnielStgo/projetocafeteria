@@ -182,7 +182,8 @@ public class ViewCliente : Form {
     }
 
     private void ClickCadastrar(object? sender, EventArgs e) {
-        if(InpNome.Text == "") {
+        if(InpNome.Text == "" || InpIdade.Text == ""  || InpCpf.Text == "" || InpTelefone.Text == "") {
+            MessageBox.Show("Não foi possível cadastrar o cliente. Favor verificar os campos e tentar outra vez");
             return;
         }
         ControllerCliente.CriarCliente(InpNome.Text, InpIdade.Text, InpCpf.Text, InpTelefone.Text);
@@ -197,7 +198,8 @@ public class ViewCliente : Form {
         try
         {
             int index = DgvClientes.SelectedRows[0].Index;
-            if(InpNome.Text == "") {
+            if(InpNome.Text == "" || InpIdade.Text == ""  || InpCpf.Text == "" || InpTelefone.Text == "") {
+                MessageBox.Show("Não foi possível alterar o cliente. Favor verificar os campos e tentar outra vez");
                 return;
             }
             ControllerCliente.AlterarCliente(index, InpNome.Text, InpIdade.Text, InpCpf.Text, InpTelefone.Text);

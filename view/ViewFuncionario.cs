@@ -71,7 +71,7 @@ public class ViewFuncionario : Form {
             Text = "A seguir campos para cadastrar ou alterar um funcionário",
             AutoSize = true,
             Font = new Font("Arial", 16, FontStyle.Bold),
-           ForeColor = ColorTranslator.FromHtml(CorTitulos),
+            ForeColor = ColorTranslator.FromHtml(CorTitulos),
             Location = new Point(30, 150),
         };
         LblNome = new Label {
@@ -182,7 +182,8 @@ public class ViewFuncionario : Form {
     }
 
     private void ClickCadastrar(object? sender, EventArgs e) {
-        if(InpNome.Text == "") {
+        if(InpNome.Text == "" || InpIdade.Text == ""  || InpCpf.Text == "" || InpTelefone.Text == "") {
+            MessageBox.Show("Não foi possível cadastrar o funcionário. Favor verificar os campos e tentar outra vez");
             return;
         }
         ControllerFuncionario.CriarFuncionario(InpNome.Text, InpIdade.Text, InpCpf.Text, InpTelefone.Text);
@@ -197,7 +198,8 @@ public class ViewFuncionario : Form {
         try
         {
             int index = DgvFuncionarios.SelectedRows[0].Index;
-            if(InpNome.Text == "") {
+            if(InpNome.Text == "" || InpIdade.Text == ""  || InpCpf.Text == "" || InpTelefone.Text == "") {
+                MessageBox.Show("Não foi possível alterar o funcionário. Favor verificar os campos e tentar outra vez");
                 return;
             }
             ControllerFuncionario.AlterarFuncionario(index, InpNome.Text, InpIdade.Text, InpCpf.Text, InpTelefone.Text);

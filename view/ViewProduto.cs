@@ -166,7 +166,8 @@ public class ViewProduto : Form {
     }
 
     private void ClickCadastrar(object? sender, EventArgs e) {
-        if(InpCodigo.Text == "") {
+        if(InpCodigo.Text == "" || InpDescricao.Text == ""  || InpPreco.Text == "") {
+            MessageBox.Show("Não foi possível cadastrar o produto. Favor verificar os campos e tentar outra vez");
             return;
         }
         ControllerProduto.CriarProduto(InpCodigo.Text, InpDescricao.Text, Convert.ToDecimal(InpPreco.Text));
@@ -180,9 +181,10 @@ public class ViewProduto : Form {
         try
         {
             int index = DgvProdutos.SelectedRows[0].Index;
-            if(InpCodigo.Text == "") {
-                return;
-            }
+            if(InpCodigo.Text == "" || InpDescricao.Text == ""  || InpPreco.Text == "") {
+            MessageBox.Show("Não foi possível alterar o produto. Favor verificar os campos e tentar outra vez");
+            return;
+        }
             ControllerProduto.AlterarProduto(index, InpCodigo.Text, InpDescricao.Text, Convert.ToDecimal(InpPreco.Text));
             Listar();
         }
