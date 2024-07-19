@@ -7,6 +7,7 @@ public class ViewNovoPedido : Form {
 
     private readonly Form ParentForm;
     private readonly Label LblTitulo;
+    private readonly Button BtnAjuda;
     private readonly Label LblSubTitulo;
     private readonly Label LblIdCliente;    
     private readonly TextBox InpIdCliente;
@@ -46,6 +47,16 @@ public class ViewNovoPedido : Form {
             TextAlign = ContentAlignment.MiddleCenter,
             Location = new Point(120, 30),
         };
+        BtnAjuda = new Button {
+            Text = "Ajuda",
+            Size = new Size(60, 30),
+            Font = new Font("Arial", 12, FontStyle.Bold),
+            ForeColor = ColorTranslator.FromHtml(CorTitulos),
+            TextAlign = ContentAlignment.MiddleCenter,
+            Location = new Point(540, 20),
+        };
+        BtnAjuda.Click += ClickAjuda;
+
         LblSubTitulo = new Label {
             Text = "A seguir campos para adicionar um novo pedido",
             AutoSize = true,
@@ -151,6 +162,7 @@ public class ViewNovoPedido : Form {
         DgvProdutos.Columns[3].Width = 90;
 
         Controls.Add(LblTitulo);
+        Controls.Add(BtnAjuda);
         Controls.Add(LblSubTitulo);
         Controls.Add(LblIdCliente);
         Controls.Add(InpIdCliente);
@@ -186,6 +198,10 @@ public class ViewNovoPedido : Form {
         var autoCompleteCollection = new AutoCompleteStringCollection();
         autoCompleteCollection.AddRange(listaDescricaoProdutos.ToArray());
         CbbCodProduto.AutoCompleteCustomSource = autoCompleteCollection;
+    }
+
+    private void ClickAjuda(object? sender, EventArgs e) {
+        MessageBox.Show("AJUDA:\n\n- Para realiar um novo pedido primerio peencha os campos 'IdCliente', 'IdFuncionário', 'Produto' e 'Quantidade' e depois clique no botão 'Adicionar Prod.'. Repita este procedimento até adicionar todos os produtos do pedido e por último clique no botão 'Finalizar' para salvar o pedido");
     }
 
     private void ClickAddProduto(object? sender, EventArgs e) {
